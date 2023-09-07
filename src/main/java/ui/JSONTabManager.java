@@ -12,6 +12,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class JSONTabManager {
+	private static final String FULL_JSON_FILE = "Full JSON File";
 	private static final String TITLE = "title";
 	private static final String RESOURCE = "resource";
 	private static final String BUNDLE = "Bundle";
@@ -36,7 +37,7 @@ public class JSONTabManager {
 			DefaultListModel<String> resourceListModel = new DefaultListModel<>();
 
 			// Add the top-level JSON as the "Full JSON File" entry
-			resourceListModel.addElement("Full JSON File");
+			resourceListModel.addElement(FULL_JSON_FILE);
 
 			// Iterate through the "entry" array
 			for (int i = 0; i < jsonArray.length(); i++) {

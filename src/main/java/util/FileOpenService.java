@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 import main.BundleViewerMain;
 import persist.Constants;
-import persist.OpenFileList;
+import persist.PersistedOpenFileList;
 import ui.JSONTabManager;
 
 public class FileOpenService {
@@ -19,7 +19,7 @@ public class FileOpenService {
 		try {
 
 			// focus on the tab that already has the file open if open:
-			Integer addFile = OpenFileList.addFileToList(file);
+			Integer addFile = PersistedOpenFileList.addFileToList(file);
 			
 			if (addFile != -1) {
 				BundleViewerMain.tabbedPane.setSelectedIndex(addFile);

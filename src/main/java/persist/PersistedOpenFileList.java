@@ -10,7 +10,7 @@ import java.util.List;
  * @author echic
  *
  */
-public class OpenFileList {
+public class PersistedOpenFileList {
 	private static List<String> tabLocation = new ArrayList<>();
 	/**
 	 * when opening file in new tab, check for existing entry, return index if

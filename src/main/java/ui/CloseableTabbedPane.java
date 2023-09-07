@@ -7,8 +7,14 @@ import java.awt.event.ActionListener;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 import persist.Constants;
-import persist.OpenFileList;
+import persist.PersistedOpenFileList;
 
+/**Simple class for closing a JTabbedPane by painting an X over the end 
+ * and adding an action listener to it. Parent clas extends JTabbedPane but offers a
+ * basic close button via BasicButtonUI
+ * @author echic
+ *
+ */
 public class CloseableTabbedPane extends JTabbedPane {
     /**
 	 * 
@@ -20,7 +26,12 @@ public class CloseableTabbedPane extends JTabbedPane {
     }
 
     private class TabCloseButton extends JButton {
-        public TabCloseButton(final Component component) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public TabCloseButton(final Component component) {
             int size = 17;
             setPreferredSize(new Dimension(size, size));
             setToolTipText(Constants.LABEL_CLOSE_TAB);
@@ -37,7 +48,7 @@ public class CloseableTabbedPane extends JTabbedPane {
                     int tabIndex = indexOfComponent(component);
                     if (tabIndex != -1) {
                         removeTabAt(tabIndex);
-                        OpenFileList.removeFromMap(tabIndex);
+                        PersistedOpenFileList.removeFromMap(tabIndex);
                     }
                 }
             });

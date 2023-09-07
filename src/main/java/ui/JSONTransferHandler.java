@@ -10,8 +10,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+/**Simple class for allowing drag and drop of files over the main pane to open them
+ * @author echic
+ *
+ */
 public class JSONTransferHandler extends TransferHandler {
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
     public boolean canImport(TransferSupport support) {
         return support.isDataFlavorSupported(DataFlavor.javaFileListFlavor);
     }
