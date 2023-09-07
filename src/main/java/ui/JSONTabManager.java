@@ -3,7 +3,8 @@ package ui;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import main.JSONFileViewer;
+import main.BundleViewerMain;
+import persist.Constants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,10 +12,16 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class JSONTabManager {
+	private static final String TITLE = "title";
+	private static final String RESOURCE = "resource";
+	private static final String BUNDLE = "Bundle";
+	private static final String RESOURCE_TYPE = "resourceType";
+	private static final String ENTRY = "entry";
+
 	public static void createJsonTab(String fileName, String fileContent) {
 		JSONObject jsonObject = new JSONObject(fileContent);
 
-		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(JSONFileViewer.tabbedPane);
+		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(BundleViewerMain.tabbedPane);
 
 		JTextArea textArea = new JTextArea(20, 60);
 		textArea.setEditable(false);
@@ -23,9 +30,9 @@ public class JSONTabManager {
 
 		// Check if the top-level object has an "entry" array and "resourceType" is
 		// "Bundle"
-		if (jsonObject.has("entry") && jsonObject.has("resourceType")
-				&& jsonObject.getString("resourceType").equals("Bundle")) {
-			JSONArray jsonArray = jsonObject.getJSONArray("entry");
+		if (jsonObject.has(ENTRY) && jsonObject.has(RESOURCE_TYPE)
+				&& jsonObject.getString(RESOURCE_TYPE).equals(BUNDLE)) {
+			JSONArray jsonArray = jsonObject.getJSONArray(ENTRY);
 			DefaultListModel<String> resourceListModel = new DefaultListModel<>();
 
 			// Add the top-level JSON as the "Full JSON File" entry
@@ -34,9 +41,9 @@ public class JSONTabManager {
 			// Iterate through the "entry" array
 			for (int i = 0; i < jsonArray.length(); i++) {
 				JSONObject entryObject = jsonArray.getJSONObject(i);
-				if (entryObject.has("resource") && entryObject.getJSONObject("resource").has("title")) {
+				if (entryObject.has(RESOURCE) && entryObject.getJSONObject(RESOURCE).has(TITLE)) {
 					// Use the "title" field if it exists
-					resourceListModel.addElement(entryObject.getJSONObject("resource").getString("title"));
+					resourceListModel.addElement(entryObject.getJSONObject(RESOURCE).getString(TITLE));
 				} else {
 					// Use a default title
 					resourceListModel.addElement("Resource " + (i + 1));
@@ -74,16 +81,26 @@ public class JSONTabManager {
 			// Create a split pane to display list and text
 			JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, new JScrollPane(resourceList),
 					scrollPane);
-			splitPane.setResizeWeight(0.2);
+
+			// Set the resize weight to allocate 25% of the width to the list
+			splitPane.setResizeWeight(0.25);
+
+			// Calculate the width of the list to be 25% of the total width of the split
+			// pane
+			int totalWidth = splitPane.getWidth();
+			int listWidth = (int) (totalWidth * 0.25);
+
+			// Set the preferred size of the list component
+			resourceList.setPreferredSize(new Dimension(listWidth, resourceList.getPreferredSize().height));
 
 			// Add the new tab with the split pane
-			JSONFileViewer.tabbedPane.addTab(fileName, splitPane);
+			BundleViewerMain.tabbedPane.addTab(fileName, splitPane);
 
 			// Set focus to the newly created tab
-			JSONFileViewer.tabbedPane.setSelectedIndex(JSONFileViewer.tabbedPane.getTabCount() - 1);
+			BundleViewerMain.tabbedPane.setSelectedIndex(BundleViewerMain.tabbedPane.getTabCount() - 1);
 
 		} else {
-			JOptionPane.showMessageDialog(frame, "The selected file is not a valid Bundle JSON.", "Error",
+			JOptionPane.showMessageDialog(frame, Constants.ERROR_INVALID_JSON, Constants.ERROR_TITLE,
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}

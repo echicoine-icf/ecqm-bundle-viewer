@@ -2,18 +2,20 @@ package main;
 
 import javax.swing.*;
 
+import persist.Constants;
+import ui.CloseableTabbedPane;
 import ui.JSONTransferHandler;
 import util.FileOpenHandler;
 
 import java.awt.*;
 
-public class JSONFileViewer {
+public class BundleViewerMain {
     // Declare tabbedPane as a class-level variable
-    public static JTabbedPane tabbedPane;
+    public static CloseableTabbedPane tabbedPane;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("eCQM Bundle Viewer");
+            JFrame frame = new JFrame(Constants.TITLE);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(1280, 720);
 
@@ -24,11 +26,11 @@ public class JSONFileViewer {
                 e.printStackTrace();
             }
 
-            tabbedPane = new JTabbedPane();
+            tabbedPane = new CloseableTabbedPane();
 
             JMenuBar menuBar = new JMenuBar();
-            JMenu fileMenu = new JMenu("File");
-            JMenuItem openMenuItem = new JMenuItem("Open");
+            JMenu fileMenu = new JMenu(Constants.MENU_FILE);
+            JMenuItem openMenuItem = new JMenuItem(Constants.MENU_FILE_OPEN);
 
             openMenuItem.addActionListener(new FileOpenHandler());
 
