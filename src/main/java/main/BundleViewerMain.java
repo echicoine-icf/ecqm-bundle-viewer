@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import persist.Constants;
 import ui.CloseableTabbedPane;
-import ui.JSONTransferHandler;
+import ui.BundleTransferHandler;
 import util.FileOpenHandler;
 
 import java.awt.*;
@@ -41,7 +41,7 @@ public class BundleViewerMain {
             frame.add(tabbedPane, BorderLayout.CENTER);
 
             // Enable drag-and-drop functionality for the frame
-            frame.setTransferHandler(new JSONTransferHandler());
+            frame.setTransferHandler(new BundleTransferHandler());
 
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);

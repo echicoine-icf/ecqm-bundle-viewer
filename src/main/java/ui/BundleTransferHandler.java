@@ -14,7 +14,7 @@ import java.util.List;
  * @author echic
  *
  */
-public class JSONTransferHandler extends TransferHandler {
+public class BundleTransferHandler extends TransferHandler {
     /**
 	 * 
 	 */
