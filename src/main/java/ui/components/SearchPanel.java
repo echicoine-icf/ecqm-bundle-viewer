@@ -21,7 +21,11 @@ import javax.swing.text.Highlighter;
 import javax.swing.text.JTextComponent;
 
 public class SearchPanel extends JPanel {
-    private JLabel searchLabel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JLabel searchLabel;
     private JTextField searchTextField;
     private JCheckBox multiSearchCheckBox;
     private JTextArea textArea;
