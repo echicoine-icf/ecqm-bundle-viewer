@@ -1,7 +1,5 @@
 package persist;
 
-import javax.swing.Icon;
-
 public class Constants {
 
 	public static final String TITLE = "eCQM Bundle Viewer";

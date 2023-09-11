@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import main.BundleViewerMain;
 import persist.Constants;
 import persist.PersistedOpenFileList;
-import ui.JSONTabManager;
+import ui.TabManager;
 
 public class FileOpenService {
 	
@@ -41,7 +41,7 @@ public class FileOpenService {
 				return;
 			}
 
-			JSONTabManager.createJsonTab(file.getName(), fileContent.toString());
+			TabManager.createJsonTab(file.getName(), fileContent.toString());
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			// Handle file read error

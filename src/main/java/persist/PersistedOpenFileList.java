@@ -23,7 +23,6 @@ public class PersistedOpenFileList {
 	public static Integer addFileToList(File file) {
 		String fullPath = file.getAbsolutePath();
 		Integer i = tabLocation.indexOf(fullPath);
-		System.out.println(i);
 		if (i != -1 ) {
 			return i;
 		}
