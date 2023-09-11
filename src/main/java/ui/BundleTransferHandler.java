@@ -1,6 +1,5 @@
 package ui;
 
-
 import javax.swing.*;
 
 import util.FileOpenService;
@@ -10,10 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-/**Simple class for allowing drag and drop of files over the main pane to open them
- * @author echic
- *
- */
 public class BundleTransferHandler extends TransferHandler {
     /**
 	 * 
@@ -49,4 +44,3 @@ public class BundleTransferHandler extends TransferHandler {
         }
     }
 }
-
